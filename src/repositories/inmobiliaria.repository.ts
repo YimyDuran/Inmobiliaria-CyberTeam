@@ -1,28 +1,29 @@
 import {inject, Getter} from '@loopback/core';
 import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
 import {MongodbDataSource} from '../datasources';
-import {Inmobiliaria, InmobiliariaRelations, Admin, Asesor} from '../models';
+import {Inmobiliaria, InmobiliariaRelations, Admin, Asesor, Cliente} from '../models';
 import {AdminRepository} from './admin.repository';
 import {AsesorRepository} from './asesor.repository';
+import {ClienteRepository} from './cliente.repository';
 
 export class InmobiliariaRepository extends DefaultCrudRepository<
   Inmobiliaria,
-  typeof Inmobiliaria.prototype.id,
+  typeof Inmobiliaria.prototype._id,
   InmobiliariaRelations
 > {
 
-  public readonly admins: HasManyRepositoryFactory<Admin, typeof Inmobiliaria.prototype.id>;
+  public readonly admins: HasManyRepositoryFactory<Admin, typeof Inmobiliaria.prototype._id>;
 
-  public readonly asesors: HasManyRepositoryFactory<Asesor, typeof Inmobiliaria.prototype.id>;
+  public readonly asesors: HasManyRepositoryFactory<Asesor, typeof Inmobiliaria.prototype._id>;
 
-  public readonly as: HasManyRepositoryFactory<Asesor, typeof Inmobiliaria.prototype.id>;
+  public readonly clientes: HasManyRepositoryFactory<Cliente, typeof Inmobiliaria.prototype._id>;
 
   constructor(
-    @inject('datasources.mongodb') dataSource: MongodbDataSource, @repository.getter('AdminRepository') protected adminRepositoryGetter: Getter<AdminRepository>, @repository.getter('AsesorRepository') protected asesorRepositoryGetter: Getter<AsesorRepository>,
+    @inject('datasources.mongodb') dataSource: MongodbDataSource, @repository.getter('AdminRepository') protected adminRepositoryGetter: Getter<AdminRepository>, @repository.getter('AsesorRepository') protected asesorRepositoryGetter: Getter<AsesorRepository>, @repository.getter('ClienteRepository') protected clienteRepositoryGetter: Getter<ClienteRepository>,
   ) {
     super(Inmobiliaria, dataSource);
-    this.as = this.createHasManyRepositoryFactoryFor('as', asesorRepositoryGetter,);
-    this.registerInclusionResolver('as', this.as.inclusionResolver);
+    this.clientes = this.createHasManyRepositoryFactoryFor('clientes', clienteRepositoryGetter,);
+    this.registerInclusionResolver('clientes', this.clientes.inclusionResolver);
     this.asesors = this.createHasManyRepositoryFactoryFor('asesors', asesorRepositoryGetter,);
     this.registerInclusionResolver('asesors', this.asesors.inclusionResolver);
     this.admins = this.createHasManyRepositoryFactoryFor('admins', adminRepositoryGetter,);

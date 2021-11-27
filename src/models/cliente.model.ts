@@ -1,12 +1,10 @@
 import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
 import {Inmobiliaria} from './inmobiliaria.model';
-import {Admin} from './admin.model';
+import {Asesor} from './asesor.model';
 import {Solicitud} from './solicitud.model';
-import {Cliente} from './cliente.model';
-import {Inmueble} from './inmueble.model';
 
 @model({settings: {strict: false}})
-export class Asesor extends Entity {
+export class Cliente extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -54,45 +52,29 @@ export class Asesor extends Entity {
     type: 'string',
     required: true,
   })
-  codigoEmpresa: string;
+  direccion: string;
 
   @belongsTo(() => Inmobiliaria)
   inmobiliariaId: string;
 
-  @belongsTo(() => Admin)
-  adminId: string;
+  @belongsTo(() => Asesor)
+  asesorId: string;
 
   @hasMany(() => Solicitud)
   solicituds: Solicitud[];
-
-  @hasMany(() => Cliente)
-  clientes: Cliente[];
-
-  @property({
-    type: 'string',
-  })
-  estadoId?: string;
-
-  @property({
-    type: 'string',
-  })
-  inmuebleId?: string;
-
-  @hasMany(() => Inmueble)
-  inmuebles: Inmueble[];
   // Define well-known properties here
 
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<Asesor>) {
+  constructor(data?: Partial<Cliente>) {
     super(data);
   }
 }
 
-export interface AsesorRelations {
+export interface ClienteRelations {
   // describe navigational properties here
 }
 
-export type AsesorWithRelations = Asesor & AsesorRelations;
+export type ClienteWithRelations = Cliente & ClienteRelations;

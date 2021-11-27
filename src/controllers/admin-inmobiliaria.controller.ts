@@ -1,13 +1,14 @@
 import {
-  repository
+  repository,
 } from '@loopback/repository';
 import {
+  param,
   get,
-  getModelSchemaRef, param
+  getModelSchemaRef,
 } from '@loopback/rest';
 import {
   Admin,
-  Inmobiliaria
+  Inmobiliaria,
 } from '../models';
 import {AdminRepository} from '../repositories';
 
@@ -30,7 +31,7 @@ export class AdminInmobiliariaController {
     },
   })
   async getInmobiliaria(
-    @param.path.string('id') id: typeof Admin.prototype.InmobiliariaId,
+    @param.path.string('id') id: typeof Admin.prototype._id,
   ): Promise<Inmobiliaria> {
     return this.adminRepository.inmobiliaria(id);
   }

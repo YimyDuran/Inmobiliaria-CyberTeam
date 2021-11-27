@@ -26,7 +26,7 @@ export class InmobiliariaController {
     public inmobiliariaRepository : InmobiliariaRepository,
   ) {}
 
-  @post('/inmobiliaria')
+  @post('/inmobiliarias')
   @response(200, {
     description: 'Inmobiliaria model instance',
     content: {'application/json': {schema: getModelSchemaRef(Inmobiliaria)}},
@@ -37,17 +37,17 @@ export class InmobiliariaController {
         'application/json': {
           schema: getModelSchemaRef(Inmobiliaria, {
             title: 'NewInmobiliaria',
-            exclude: ['id'],
+            exclude: ['_id'],
           }),
         },
       },
     })
-    inmobiliaria: Omit<Inmobiliaria, 'id'>,
+    inmobiliaria: Omit<Inmobiliaria, '_id'>,
   ): Promise<Inmobiliaria> {
     return this.inmobiliariaRepository.create(inmobiliaria);
   }
 
-  @get('/inmobiliaria/count')
+  @get('/inmobiliarias/count')
   @response(200, {
     description: 'Inmobiliaria model count',
     content: {'application/json': {schema: CountSchema}},
@@ -58,7 +58,7 @@ export class InmobiliariaController {
     return this.inmobiliariaRepository.count(where);
   }
 
-  @get('/inmobiliaria')
+  @get('/inmobiliarias')
   @response(200, {
     description: 'Array of Inmobiliaria model instances',
     content: {
@@ -76,7 +76,7 @@ export class InmobiliariaController {
     return this.inmobiliariaRepository.find(filter);
   }
 
-  @patch('/inmobiliaria')
+  @patch('/inmobiliarias')
   @response(200, {
     description: 'Inmobiliaria PATCH success count',
     content: {'application/json': {schema: CountSchema}},
@@ -95,7 +95,7 @@ export class InmobiliariaController {
     return this.inmobiliariaRepository.updateAll(inmobiliaria, where);
   }
 
-  @get('/inmobiliaria/{id}')
+  @get('/inmobiliarias/{id}')
   @response(200, {
     description: 'Inmobiliaria model instance',
     content: {
@@ -111,7 +111,7 @@ export class InmobiliariaController {
     return this.inmobiliariaRepository.findById(id, filter);
   }
 
-  @patch('/inmobiliaria/{id}')
+  @patch('/inmobiliarias/{id}')
   @response(204, {
     description: 'Inmobiliaria PATCH success',
   })
@@ -129,7 +129,7 @@ export class InmobiliariaController {
     await this.inmobiliariaRepository.updateById(id, inmobiliaria);
   }
 
-  @put('/inmobiliaria/{id}')
+  @put('/inmobiliarias/{id}')
   @response(204, {
     description: 'Inmobiliaria PUT success',
   })
@@ -140,7 +140,7 @@ export class InmobiliariaController {
     await this.inmobiliariaRepository.replaceById(id, inmobiliaria);
   }
 
-  @del('/inmobiliaria/{id}')
+  @del('/inmobiliarias/{id}')
   @response(204, {
     description: 'Inmobiliaria DELETE success',
   })

@@ -7,21 +7,21 @@ import {
   getModelSchemaRef,
 } from '@loopback/rest';
 import {
-  Asesor,
+  Cliente,
   Inmobiliaria,
 } from '../models';
-import {AsesorRepository} from '../repositories';
+import {ClienteRepository} from '../repositories';
 
-export class AsesorInmobiliariaController {
+export class ClienteInmobiliariaController {
   constructor(
-    @repository(AsesorRepository)
-    public asesorRepository: AsesorRepository,
+    @repository(ClienteRepository)
+    public clienteRepository: ClienteRepository,
   ) { }
 
-  @get('/asesors/{id}/inmobiliaria', {
+  @get('/clientes/{id}/inmobiliaria', {
     responses: {
       '200': {
-        description: 'Inmobiliaria belonging to Asesor',
+        description: 'Inmobiliaria belonging to Cliente',
         content: {
           'application/json': {
             schema: {type: 'array', items: getModelSchemaRef(Inmobiliaria)},
@@ -31,8 +31,8 @@ export class AsesorInmobiliariaController {
     },
   })
   async getInmobiliaria(
-    @param.path.string('id') id: typeof Asesor.prototype._id,
+    @param.path.string('id') id: typeof Cliente.prototype._id,
   ): Promise<Inmobiliaria> {
-    return this.asesorRepository.inmobiliaria(id);
+    return this.clienteRepository.inmobiliaria(id);
   }
 }

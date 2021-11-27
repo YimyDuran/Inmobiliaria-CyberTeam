@@ -1,19 +1,17 @@
-import {belongsTo, Entity, model, property} from '@loopback/repository';
+import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
 import {Inmobiliaria} from './inmobiliaria.model';
+import {Inmueble} from './inmueble.model';
+import {Asesor} from './asesor.model';
+import {Solicitud} from './solicitud.model';
 
-@model()
+@model({settings: {strict: false}})
 export class Admin extends Entity {
   @property({
     type: 'string',
-    required: true,
+    id: true,
+    generated: true,
   })
-  id: string;
-
-  @property({
-    type: 'string',
-    required: true,
-  })
-  CodigoEmpresa: string;
+  _id?: string;
 
   @property({
     type: 'string',
@@ -25,39 +23,54 @@ export class Admin extends Entity {
     type: 'string',
     required: true,
   })
-  Nombre: string;
+  nombres: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  Apellidos: string;
+  apellidos: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  Edad: string;
+  edad: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  Correo: string;
+  correo: string;
 
   @property({
     type: 'string',
     required: true,
   })
   telefono: string;
+
   @property({
     type: 'string',
     required: true,
   })
-  InmobiliariaId: string;
+  codigoEmpresa: string;
 
   @belongsTo(() => Inmobiliaria)
-  inmobiliaria: string;
+  inmobiliariaId: string;
+
+  @hasMany(() => Inmueble)
+  inmuebles: Inmueble[];
+
+  @hasMany(() => Asesor)
+  asesors: Asesor[];
+
+  @hasMany(() => Solicitud)
+  solicituds: Solicitud[];
+  // Define well-known properties here
+
+  // Indexer property to allow additional data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [prop: string]: any;
 
   constructor(data?: Partial<Admin>) {
     super(data);

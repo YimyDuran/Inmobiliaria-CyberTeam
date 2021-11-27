@@ -1,12 +1,10 @@
-import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
-import {Inmobiliaria} from './inmobiliaria.model';
+import {Entity, model, property, belongsTo, hasOne, hasMany} from '@loopback/repository';
 import {Admin} from './admin.model';
+import {Asesor} from './asesor.model';
 import {Solicitud} from './solicitud.model';
-import {Cliente} from './cliente.model';
-import {Inmueble} from './inmueble.model';
 
 @model({settings: {strict: false}})
-export class Asesor extends Entity {
+export class Inmueble extends Entity {
   @property({
     type: 'string',
     id: true,
@@ -18,81 +16,81 @@ export class Asesor extends Entity {
     type: 'string',
     required: true,
   })
-  cedula: string;
+  nombre: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  nombres: string;
+  descripcion: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  apellidos: string;
+  costo: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  edad: string;
+  tipoInmueble: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  correo: string;
+  tipoOferta: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  telefono: string;
+  fotografias: string;
 
   @property({
     type: 'string',
     required: true,
   })
-  codigoEmpresa: string;
+  video: string;
 
-  @belongsTo(() => Inmobiliaria)
-  inmobiliariaId: string;
+  @property({
+    type: 'string',
+    required: true,
+  })
+  ubicacion: string;
 
   @belongsTo(() => Admin)
   adminId: string;
 
+  @hasOne(() => Asesor)
+  asesor: Asesor;
+
+  @property({
+    type: 'string',
+  })
+  asesorId?: string;
+
+  @property({
+    type: 'string',
+  })
+  solicitudId?: string;
+
   @hasMany(() => Solicitud)
   solicituds: Solicitud[];
-
-  @hasMany(() => Cliente)
-  clientes: Cliente[];
-
-  @property({
-    type: 'string',
-  })
-  estadoId?: string;
-
-  @property({
-    type: 'string',
-  })
-  inmuebleId?: string;
-
-  @hasMany(() => Inmueble)
-  inmuebles: Inmueble[];
   // Define well-known properties here
 
   // Indexer property to allow additional data
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   [prop: string]: any;
 
-  constructor(data?: Partial<Asesor>) {
+  constructor(data?: Partial<Inmueble>) {
     super(data);
   }
 }
 
-export interface AsesorRelations {
+export interface InmuebleRelations {
   // describe navigational properties here
 }
 
-export type AsesorWithRelations = Asesor & AsesorRelations;
+export type InmuebleWithRelations = Inmueble & InmuebleRelations;

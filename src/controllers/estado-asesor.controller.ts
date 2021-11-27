@@ -16,64 +16,64 @@ import {
   requestBody,
 } from '@loopback/rest';
 import {
-  Inmobiliaria,
+  Estado,
   Asesor,
 } from '../models';
-import {InmobiliariaRepository} from '../repositories';
+import {EstadoRepository} from '../repositories';
 
-export class InmobiliariaAsesorController {
+export class EstadoAsesorController {
   constructor(
-    @repository(InmobiliariaRepository) protected inmobiliariaRepository: InmobiliariaRepository,
+    @repository(EstadoRepository) protected estadoRepository: EstadoRepository,
   ) { }
 
-  @get('/inmobiliarias/{id}/asesors', {
+  @get('/estados/{id}/asesor', {
     responses: {
       '200': {
-        description: 'Array of Inmobiliaria has many Asesor',
+        description: 'Estado has one Asesor',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Asesor)},
+            schema: getModelSchemaRef(Asesor),
           },
         },
       },
     },
   })
-  async find(
+  async get(
     @param.path.string('id') id: string,
     @param.query.object('filter') filter?: Filter<Asesor>,
-  ): Promise<Asesor[]> {
-    return this.inmobiliariaRepository.asesors(id).find(filter);
+  ): Promise<Asesor> {
+    return this.estadoRepository.asesor(id).get(filter);
   }
 
-  @post('/inmobiliarias/{id}/asesors', {
+  @post('/estados/{id}/asesor', {
     responses: {
       '200': {
-        description: 'Inmobiliaria model instance',
+        description: 'Estado model instance',
         content: {'application/json': {schema: getModelSchemaRef(Asesor)}},
       },
     },
   })
   async create(
-    @param.path.string('id') id: typeof Inmobiliaria.prototype._id,
+    @param.path.string('id') id: typeof Estado.prototype._id,
     @requestBody({
       content: {
         'application/json': {
           schema: getModelSchemaRef(Asesor, {
-            title: 'NewAsesorInInmobiliaria',
+            title: 'NewAsesorInEstado',
             exclude: ['_id'],
-            optional: ['inmobiliariaId']
+            optional: ['estadoId']
           }),
         },
       },
     }) asesor: Omit<Asesor, '_id'>,
   ): Promise<Asesor> {
-    return this.inmobiliariaRepository.asesors(id).create(asesor);
+    return this.estadoRepository.asesor(id).create(asesor);
   }
 
-  @patch('/inmobiliarias/{id}/asesors', {
+  @patch('/estados/{id}/asesor', {
     responses: {
       '200': {
-        description: 'Inmobiliaria.Asesor PATCH success count',
+        description: 'Estado.Asesor PATCH success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -90,13 +90,13 @@ export class InmobiliariaAsesorController {
     asesor: Partial<Asesor>,
     @param.query.object('where', getWhereSchemaFor(Asesor)) where?: Where<Asesor>,
   ): Promise<Count> {
-    return this.inmobiliariaRepository.asesors(id).patch(asesor, where);
+    return this.estadoRepository.asesor(id).patch(asesor, where);
   }
 
-  @del('/inmobiliarias/{id}/asesors', {
+  @del('/estados/{id}/asesor', {
     responses: {
       '200': {
-        description: 'Inmobiliaria.Asesor DELETE success count',
+        description: 'Estado.Asesor DELETE success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -105,6 +105,6 @@ export class InmobiliariaAsesorController {
     @param.path.string('id') id: string,
     @param.query.object('where', getWhereSchemaFor(Asesor)) where?: Where<Asesor>,
   ): Promise<Count> {
-    return this.inmobiliariaRepository.asesors(id).delete(where);
+    return this.estadoRepository.asesor(id).delete(where);
   }
 }

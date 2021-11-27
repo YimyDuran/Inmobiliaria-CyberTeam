@@ -1,15 +1,16 @@
-import {Entity, hasMany, model, property} from '@loopback/repository';
-import {Asesor} from '.';
+import {Entity, model, property, hasMany} from '@loopback/repository';
 import {Admin} from './admin.model';
+import {Asesor} from './asesor.model';
+import {Cliente} from './cliente.model';
 
-@model()
+@model({settings: {strict: false}})
 export class Inmobiliaria extends Entity {
   @property({
     type: 'string',
     id: true,
     generated: true,
   })
-  id?: string;
+  _id?: string;
 
   @property({
     type: 'string',
@@ -27,15 +28,22 @@ export class Inmobiliaria extends Entity {
     type: 'string',
     required: true,
   })
-  Nit: string;
-
-
+  nit: string;
 
   @hasMany(() => Admin)
   admins: Admin[];
 
   @hasMany(() => Asesor)
   asesors: Asesor[];
+
+  @hasMany(() => Cliente)
+  clientes: Cliente[];
+  // Define well-known properties here
+
+  // Indexer property to allow additional data
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  [prop: string]: any;
+
   constructor(data?: Partial<Inmobiliaria>) {
     super(data);
   }

@@ -17,22 +17,22 @@ import {
 } from '@loopback/rest';
 import {
   Inmobiliaria,
-  Admin,
+  Cliente,
 } from '../models';
 import {InmobiliariaRepository} from '../repositories';
 
-export class InmobiliariaAdminController {
+export class InmobiliariaClienteController {
   constructor(
     @repository(InmobiliariaRepository) protected inmobiliariaRepository: InmobiliariaRepository,
   ) { }
 
-  @get('/inmobiliarias/{id}/admins', {
+  @get('/inmobiliarias/{id}/clientes', {
     responses: {
       '200': {
-        description: 'Array of Inmobiliaria has many Admin',
+        description: 'Array of Inmobiliaria has many Cliente',
         content: {
           'application/json': {
-            schema: {type: 'array', items: getModelSchemaRef(Admin)},
+            schema: {type: 'array', items: getModelSchemaRef(Cliente)},
           },
         },
       },
@@ -40,16 +40,16 @@ export class InmobiliariaAdminController {
   })
   async find(
     @param.path.string('id') id: string,
-    @param.query.object('filter') filter?: Filter<Admin>,
-  ): Promise<Admin[]> {
-    return this.inmobiliariaRepository.admins(id).find(filter);
+    @param.query.object('filter') filter?: Filter<Cliente>,
+  ): Promise<Cliente[]> {
+    return this.inmobiliariaRepository.clientes(id).find(filter);
   }
 
-  @post('/inmobiliarias/{id}/admins', {
+  @post('/inmobiliarias/{id}/clientes', {
     responses: {
       '200': {
         description: 'Inmobiliaria model instance',
-        content: {'application/json': {schema: getModelSchemaRef(Admin)}},
+        content: {'application/json': {schema: getModelSchemaRef(Cliente)}},
       },
     },
   })
@@ -58,22 +58,22 @@ export class InmobiliariaAdminController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Admin, {
-            title: 'NewAdminInInmobiliaria',
+          schema: getModelSchemaRef(Cliente, {
+            title: 'NewClienteInInmobiliaria',
             exclude: ['_id'],
             optional: ['inmobiliariaId']
           }),
         },
       },
-    }) admin: Omit<Admin, '_id'>,
-  ): Promise<Admin> {
-    return this.inmobiliariaRepository.admins(id).create(admin);
+    }) cliente: Omit<Cliente, '_id'>,
+  ): Promise<Cliente> {
+    return this.inmobiliariaRepository.clientes(id).create(cliente);
   }
 
-  @patch('/inmobiliarias/{id}/admins', {
+  @patch('/inmobiliarias/{id}/clientes', {
     responses: {
       '200': {
-        description: 'Inmobiliaria.Admin PATCH success count',
+        description: 'Inmobiliaria.Cliente PATCH success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
@@ -83,28 +83,28 @@ export class InmobiliariaAdminController {
     @requestBody({
       content: {
         'application/json': {
-          schema: getModelSchemaRef(Admin, {partial: true}),
+          schema: getModelSchemaRef(Cliente, {partial: true}),
         },
       },
     })
-    admin: Partial<Admin>,
-    @param.query.object('where', getWhereSchemaFor(Admin)) where?: Where<Admin>,
+    cliente: Partial<Cliente>,
+    @param.query.object('where', getWhereSchemaFor(Cliente)) where?: Where<Cliente>,
   ): Promise<Count> {
-    return this.inmobiliariaRepository.admins(id).patch(admin, where);
+    return this.inmobiliariaRepository.clientes(id).patch(cliente, where);
   }
 
-  @del('/inmobiliarias/{id}/admins', {
+  @del('/inmobiliarias/{id}/clientes', {
     responses: {
       '200': {
-        description: 'Inmobiliaria.Admin DELETE success count',
+        description: 'Inmobiliaria.Cliente DELETE success count',
         content: {'application/json': {schema: CountSchema}},
       },
     },
   })
   async delete(
     @param.path.string('id') id: string,
-    @param.query.object('where', getWhereSchemaFor(Admin)) where?: Where<Admin>,
+    @param.query.object('where', getWhereSchemaFor(Cliente)) where?: Where<Cliente>,
   ): Promise<Count> {
-    return this.inmobiliariaRepository.admins(id).delete(where);
+    return this.inmobiliariaRepository.clientes(id).delete(where);
   }
 }
