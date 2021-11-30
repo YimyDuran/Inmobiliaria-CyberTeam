@@ -1,3 +1,4 @@
+import { model } from '@loopback/repository';
 import {InmobiliariaApplication} from './application';
 
 export async function migrate(args: string[]) {
@@ -6,7 +7,7 @@ export async function migrate(args: string[]) {
 
   const app = new InmobiliariaApplication();
   await app.boot();
-  await app.migrateSchema({existingSchema});
+  await app.migrateSchema({existingSchema,models:['Empleados']});
 
   // Connectors usually keep a pool of opened connections,
   // this keeps the process running even after all work is done.

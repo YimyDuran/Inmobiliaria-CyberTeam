@@ -4,14 +4,16 @@ import {juggler} from '@loopback/repository';
 const config = {
   name: 'inmpbiliaria_bd',
   connector: 'mysql',
-  url: '',
-  host: 'localhost',
+  //url: 'www.db4free.net/phpMyAdmin/index.php?route=/database/structure&server=1&db=inmobiliaria_bd',
+  host:'localhost', //'db4free.net',//'localhost',
   port: 3306,
-  user: 'root',
-  password: '',
+  user: 'root',//'equipo2misiontic',//root
+  password: '',//equipo2-MT31
   database: 'inmobiliaria_bd'
 };
-
+//equipo2-MT31
+//equipo2misiontic
+//inmobiliaria_bd
 // Observe application's life cycle to disconnect the datasource when
 // application is stopped. This allows the application to be shut down
 // gracefully. The `stop()` method is inherited from `juggler.DataSource`.

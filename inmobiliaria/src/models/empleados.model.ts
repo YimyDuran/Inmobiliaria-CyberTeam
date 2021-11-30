@@ -1,6 +1,6 @@
 import {Entity, model, property} from '@loopback/repository';
 
-@model({settings: {strict: false}})
+@model({settings: {strict: true}})
 export class Empleados extends Entity {
   @property({
     type: 'string',
@@ -56,6 +56,12 @@ export class Empleados extends Entity {
     generated: true,
   })
   id?: number;
+
+  @property({
+    type: 'string',
+    required: true,
+  })
+    id_inmobiliaria: string;
 
   // Define well-known properties here
 
