@@ -1,7 +1,7 @@
-import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
+import {Asesor} from './asesor.model';
 import {Inmobiliaria} from './inmobiliaria.model';
 import {Inmueble} from './inmueble.model';
-import {Asesor} from './asesor.model';
 import {Solicitud} from './solicitud.model';
 
 @model({settings: {strict: false}})
@@ -66,6 +66,9 @@ export class Admin extends Entity {
 
   @hasMany(() => Solicitud)
   solicituds: Solicitud[];
+
+
+
   // Define well-known properties here
 
   // Indexer property to allow additional data

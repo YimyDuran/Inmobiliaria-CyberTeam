@@ -1,4 +1,5 @@
-import {inject} from '@loopback/context';
+import {authenticate} from '@loopback/authentication';
+import {authorize} from '@loopback/authorization';
 import {
   Count,
   CountSchema,
@@ -12,18 +13,19 @@ import {
   getModelSchemaRef, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
+import {basicAuthorization} from '../middlewares/auth.midd';
 import {Asesor} from '../models';
 import {AsesorRepository} from '../repositories';
-import {RestProvider} from '../services/rest.service';
+//import {RestProvider} from '../services/rest.service';
 
 export class AsesorController {
   constructor(
     @repository(AsesorRepository)
     public asesorRepository : AsesorRepository,
-    @inject('services.rest')
-    public restService:RestProvider=new RestProvider()
+   // @inject('services.rest')
+   // public restService:RestProvider=new RestProvider()
   ) {
-    const val= restService.value();
+    //const val= restService.value();
   }
 
   @post('/asesors')
@@ -94,7 +96,11 @@ export class AsesorController {
   ): Promise<Count> {
     return this.asesorRepository.updateAll(asesor, where);
   }
-
+  @authenticate('jwt')
+  @authorize({
+    allowedRoles: ['asesor'],
+    voters: [basicAuthorization],
+  })
   @get('/asesors/{id}')
   @response(200, {
     description: 'Asesor model instance',

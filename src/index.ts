@@ -1,9 +1,10 @@
-import {ApplicationConfig, App} from './application';
+import {ApplicationConfig} from '@loopback/core';
+import {Generador31Application} from './application';
 
 export * from './application';
 
 export async function main(options: ApplicationConfig = {}) {
-  const app = new App(options);
+  const app = new Generador31Application(options);
   await app.boot();
   await app.start();
 

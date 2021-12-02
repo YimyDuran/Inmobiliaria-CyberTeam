@@ -51,6 +51,7 @@
   "dependencies": {
     "@loopback/authentication": "^8.0.0",
     "@loopback/authentication-jwt": "^0.10.0",
+    "@loopback/authorization": "^0.10.0",
     "@loopback/boot": "^4.0.0",
     "@loopback/core": "^3.0.0",
     "@loopback/repository": "^4.0.0",
@@ -59,6 +60,7 @@
     "@loopback/service-proxy": "^4.0.0",
     "@sendgrid/mail": "^7.6.0",
     "dotenv": "^10.0.0",
+    "isemail": "^3.2.0",
     "loopback-connector-mongodb": "^5.6.0",
     "loopback-connector-rest": "^3.7.0",
     "loopback-connector-twilio": "^1.0.0",
