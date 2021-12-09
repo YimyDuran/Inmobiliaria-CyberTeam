@@ -1,4 +1,4 @@
-import {Entity, model, property, hasOne} from '@loopback/repository';
+import {Entity, hasOne, model, property} from '@loopback/repository';
 import {Asesor} from './asesor.model';
 
 @model({settings: {strict: false}})
@@ -10,11 +10,11 @@ export class Estado extends Entity {
   })
   _id?: string;
 
-  @property({
-    type: 'string',
-    required: true,
-  })
-  estado_solicitud: string;
+  //@property({
+   // type: 'string',
+   // required: true,
+ // })
+ // estado_solicitud: string;
 
   @property({
     type: 'string',

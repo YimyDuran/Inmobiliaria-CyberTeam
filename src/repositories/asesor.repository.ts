@@ -1,12 +1,12 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, BelongsToAccessor, HasManyRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {BelongsToAccessor, DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {MongodbDataSource} from '../datasources';
-import {Asesor, AsesorRelations, Inmobiliaria, Admin, Solicitud, Cliente, Inmueble} from '../models';
-import {InmobiliariaRepository} from './inmobiliaria.repository';
+import {Admin, Asesor, AsesorRelations, Cliente, Inmobiliaria, Inmueble, Solicitud} from '../models';
 import {AdminRepository} from './admin.repository';
-import {SolicitudRepository} from './solicitud.repository';
 import {ClienteRepository} from './cliente.repository';
+import {InmobiliariaRepository} from './inmobiliaria.repository';
 import {InmuebleRepository} from './inmueble.repository';
+import {SolicitudRepository} from './solicitud.repository';
 
 export class AsesorRepository extends DefaultCrudRepository<
   Asesor,

@@ -18,7 +18,7 @@ import {basicAuthorization} from '../middlewares/auth.midd';
 import {Admin} from '../models';
 import {AdminRepository} from '../repositories';
 // ------------------------------------
-@authenticate('jwt') // <---- Apply the @authenticate decorator at the class level
+//@authenticate('jwt') // <---- Apply the @authenticate decorator at the class level
 
 
 export class AdminController {

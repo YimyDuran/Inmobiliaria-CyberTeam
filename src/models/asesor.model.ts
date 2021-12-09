@@ -1,9 +1,9 @@
-import {Entity, model, property, belongsTo, hasMany} from '@loopback/repository';
-import {Inmobiliaria} from './inmobiliaria.model';
+import {belongsTo, Entity, hasMany, model, property} from '@loopback/repository';
 import {Admin} from './admin.model';
-import {Solicitud} from './solicitud.model';
 import {Cliente} from './cliente.model';
+import {Inmobiliaria} from './inmobiliaria.model';
 import {Inmueble} from './inmueble.model';
+import {Solicitud} from './solicitud.model';
 
 @model({settings: {strict: false}})
 export class Asesor extends Entity {

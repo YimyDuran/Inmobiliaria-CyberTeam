@@ -1,7 +1,7 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasManyRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {DefaultCrudRepository, HasManyRepositoryFactory, repository} from '@loopback/repository';
 import {MongodbDataSource} from '../datasources';
-import {Inmobiliaria, InmobiliariaRelations, Admin, Asesor, Cliente} from '../models';
+import {Admin, Asesor, Cliente, Inmobiliaria, InmobiliariaRelations} from '../models';
 import {AdminRepository} from './admin.repository';
 import {AsesorRepository} from './asesor.repository';
 import {ClienteRepository} from './cliente.repository';
