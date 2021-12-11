@@ -3,14 +3,18 @@
 // This file is licensed under the MIT License.
 // License text available at https://opensource.org/licenses/MIT
 
-import {authenticate, TokenService} from '@loopback/authentication';
-import {
+//import {authenticate, TokenService} from '@loopback/authentication';
+/*import {
   MyUserService,
   TokenServiceBindings,
   UserServiceBindings
 } from '@loopback/authentication-jwt';
+import {authorize} from '@loopback/authorization';*/
+import {authenticate, TokenService} from '@loopback/authentication';
+import {MyUserService, TokenServiceBindings, UserServiceBindings} from '@loopback/authentication-jwt';
 import {authorize} from '@loopback/authorization';
 import {inject} from '@loopback/core';
+//import {MyUserService, TokenServiceBindings, UserServiceBindings} from '@loopback/authentication-jwt';
 import {model, property, repository} from '@loopback/repository';
 import {
   get,
@@ -24,6 +28,7 @@ import {SecurityBindings, securityId, UserProfile} from '@loopback/security';
 import {genSalt, hash} from 'bcryptjs';
 import _ from 'lodash';
 import {basicAuthorization} from '../middlewares/auth.midd';
+//import {basicAuthorization} from '../middlewares/auth.midd';
 import {Credentials, User} from '../models';
 import {UserRepository} from '../repositories';
 import {UserProfileSchema} from './specs/user-controller.specs';
