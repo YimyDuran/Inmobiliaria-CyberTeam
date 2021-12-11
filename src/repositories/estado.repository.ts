@@ -1,7 +1,7 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, HasOneRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {DefaultCrudRepository, HasOneRepositoryFactory, repository} from '@loopback/repository';
 import {MongodbDataSource} from '../datasources';
-import {Estado, EstadoRelations, Asesor} from '../models';
+import {Asesor, Estado, EstadoRelations} from '../models';
 import {AsesorRepository} from './asesor.repository';
 
 export class EstadoRepository extends DefaultCrudRepository<

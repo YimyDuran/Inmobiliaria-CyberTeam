@@ -1,14 +1,13 @@
 import {
-  repository,
+  repository
 } from '@loopback/repository';
 import {
-  param,
   get,
-  getModelSchemaRef,
+  getModelSchemaRef, param
 } from '@loopback/rest';
 import {
   Cliente,
-  Inmobiliaria,
+  Inmobiliaria
 } from '../models';
 import {ClienteRepository} from '../repositories';
 

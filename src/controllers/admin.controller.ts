@@ -1,6 +1,4 @@
 // ---------- ADD IMPORTS -------------
-import {authenticate} from '@loopback/authentication';
-import {authorize} from '@loopback/authorization';
 import {
   Count,
   CountSchema,
@@ -14,11 +12,10 @@ import {
   getModelSchemaRef, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
-import {basicAuthorization} from '../middlewares/auth.midd';
 import {Admin} from '../models';
 import {AdminRepository} from '../repositories';
 // ------------------------------------
-@authenticate('jwt') // <---- Apply the @authenticate decorator at the class level
+//@authenticate('jwt') // <---- Apply the @authenticate decorator at the class level
 
 
 export class AdminController {
@@ -95,11 +92,11 @@ export class AdminController {
   ): Promise<Count> {
     return this.adminRepository.updateAll(admin, where);
   }
-  @authenticate('jwt')
+ /* @authenticate('jwt')
   @authorize({
     allowedRoles: ['Admin'],
     voters: [basicAuthorization],
-  })
+  })*/
   @get('/admins/{id}')
   @response(200, {
     description: 'Admin model instance',

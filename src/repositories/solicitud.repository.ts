@@ -1,12 +1,12 @@
-import {inject, Getter} from '@loopback/core';
-import {DefaultCrudRepository, repository, BelongsToAccessor, HasOneRepositoryFactory} from '@loopback/repository';
+import {Getter, inject} from '@loopback/core';
+import {BelongsToAccessor, DefaultCrudRepository, HasOneRepositoryFactory, repository} from '@loopback/repository';
 import {MongodbDataSource} from '../datasources';
-import {Solicitud, SolicitudRelations, Admin, Asesor, Inmueble, Cliente, Estado} from '../models';
+import {Admin, Asesor, Cliente, Estado, Inmueble, Solicitud, SolicitudRelations} from '../models';
 import {AdminRepository} from './admin.repository';
 import {AsesorRepository} from './asesor.repository';
-import {InmuebleRepository} from './inmueble.repository';
 import {ClienteRepository} from './cliente.repository';
 import {EstadoRepository} from './estado.repository';
+import {InmuebleRepository} from './inmueble.repository';
 
 export class SolicitudRepository extends DefaultCrudRepository<
   Solicitud,

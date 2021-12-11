@@ -1,5 +1,3 @@
-import {authenticate} from '@loopback/authentication';
-import {authorize} from '@loopback/authorization';
 import {
   Count,
   CountSchema,
@@ -13,7 +11,6 @@ import {
   getModelSchemaRef, param, patch, post, put, requestBody,
   response
 } from '@loopback/rest';
-import {basicAuthorization} from '../middlewares/auth.midd';
 import {Cliente} from '../models';
 import {ClienteRepository} from '../repositories';
 
@@ -91,11 +88,11 @@ export class ClienteController {
   ): Promise<Count> {
     return this.clienteRepository.updateAll(cliente, where);
   }
-  @authenticate('jwt')
+ /* @authenticate('jwt')
   @authorize({
     allowedRoles: ['Cliente'],
     voters: [basicAuthorization],
-  })
+  })*/
   @get('/clientes/{id}')
   @response(200, {
     description: 'Cliente model instance',
